@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heng Meng Siek | Personal Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Khmer OS Battambang', sans-serif; background-color: #0b0d17; color: #ffffff; scroll-behavior: smooth; }
+        .text-pink { color: #f06292; }
+        .section-padding { padding: 60px 0; }
+        .card { background: #1a1d29; border: 1px solid #2d3244; border-radius: 20px; color: white; transition: 0.3s; }
+        .card:hover { border-color: #f06292; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #f06292; object-fit: cover; box-shadow: 0 0 15px rgba(240, 98, 146, 0.3); }
+
+        /* កែឱ្យអក្សរក្នុងប្រអប់លទ្ធផលភ្លឺច្បាស់ */
+        .result-box { margin-top: 15px; padding: 15px; background: #fff0f5; color: #333; border-left: 5px solid #f06292; border-radius: 10px; }
+        .result-box b { color: #d81b60; }
+
+        input { background: #ffffff !important; color: #333 !important; border-radius: 8px !important; }
+        .btn-pink { background-color: #f06292; color: white; border: none; border-radius: 10px; padding: 10px 20px; }
+        .btn-pink:hover { background-color: #d81b60; color: white; }
+        footer { border-top: 1px solid #2d3244; }
+    </style>
+</head>
+<body>
+
+    <header class="text-center section-padding">
+        <div class="container">
+            <img src="{% static 'sieknghaa.jpg' %}" alt="Profile" class="profile-img mb-3">
+            <h1 class="fw-bold">Heng Meng Siek</h1>
+            <p class="text-secondary">Student at <span class="text-pink">Build Bright University (BBU)</span></p>
+
+            <div class="row justify-content-center mt-4 text-start">
+                <div class="col-md-8">
+                    <div class="card p-4">
+                        <h4 class="text-pink">🌸 About Me</h4>
+                        <p>I am a passionate student currently diving deep into the world of web development. I love turning complex ideas into simple, beautiful websites. My goal is to become a Full-Stack Developer in the future.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4 h-100 shadow">
+                    <h3 class="text-pink mb-4">📝 Exam Result Checker</h3>
+                    <form method="POST">
+                        <input type="text" name="name" class="form-control mb-2" placeholder="ឈ្មោះសិស្ស" required>
+                        <input type="number" name="attendance" class="form-control mb-2" placeholder="អវត្តមាន" required>
+                        <div class="row">
+                            <div class="col-6"><input type="number" name="midterm" class="form-control mb-2" placeholder="Midterm" required></div>
+                            <div class="col-6"><input type="number" name="final" class="form-control mb-2" placeholder="Final" required></div>
+                        </div>
+                        <button type="submit" name="check_result" class="btn btn-pink w-100 mt-2">Check Result</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card p-4 h-100 shadow">
+                    <h3 class="text-info mb-4">🔮 Phone Predictor</h3>
+                    <form method="POST">
+                        <p class="small text-secondary">ទស្សន៍ទាយលាភជ័យតាមក្បួនចិន</p>
+                        <input type="tel" name="phone" class="form-control mb-3" placeholder="096XXXXXXX" maxlength="10" required>
+                        <button type="submit" name="predict" class="btn btn-info w-100 text-white" style="border-radius:10px;">ទស្សន៍ទាយ</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="section-padding text-center">
+        <div class="container">
+            <h2 class="fw-bold mb-4 text-pink">📫 Contact Me</h2>
+            <div class="card p-5 d-inline-block shadow" style="max-width: 500px;">
+                <p class="mb-4 text-secondary">អ្នកអាចទាក់ទងខ្ញុំបានតាមរយៈ Gmail និង Telegram ខាងក្រោម៖</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="mailto:hengmengsiek6@gmail.com" class="btn btn-outline-light">Email Me</a>
+                    <a href="https://t.me/httpstmemengsiek_official" class="btn btn-pink">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center py-4 mt-5">
+        <p class="text-secondary small">© 2026 Heng Meng Siek | BBU Student</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

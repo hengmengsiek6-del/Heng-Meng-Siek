@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <title>កម្មវិធីទស្សន៍ទាយលេខទូរស័ព្ទ</title>
+    <style>
+        body { font-family: 'Khmer OS Battambang', sans-serif; padding: 20px; line-height: 1.6; }
+        .container { max-width: 500px; margin: auto; border: 1px solid #a39da0; padding: 20px; border-radius: 10px; }
+        input { width: 90%; padding: 10px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #1ec0ad; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; background: #e794bd; border: 1px dashed #39e2e2; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ទស្សន៍ទាយលេខទូរស័ព្ទតាមបែបចិន</h2>
+    <form method="POST">
+        បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក:<br>
+        <input type="tel" name="phone" placeholder="ឧទាហរណ៍: 0966802087"
+    maxlength="10" required
+    oninput="this.value=this.value.replace(/[^0-9]/g,'10')">
+        <button type="submit" name="predict">ទស្សន៍ទាយ</button>
+    </form>
+
+    <?php
+    if (isset($_POST['predict'])) {
+        $phone = $_POST['phone'];
+
+        // បញ្ជាក់៖ ត្រួតពិនិត្យថាជាលេខឬអត់
+        if (!is_numeric($phone)) {
+            echo "<script>alert('សូមបញ្ចូលតែលេខប៉ុណ្ណោះ!');</script>";
+        } else {
+            // ១. ចាប់យកលេខ ៦ ខ្ទង់ចុងក្រោយ
+            $lastSix = substr($phone, -6);
+            
+            // ២. យកទៅចែកនឹង ៨០
+            $division = $lastSix / 80;
+            
+            // ៣. ដកយកតែលេខក្រោយក្បៀស (ឧទាហរណ៍: 11594.9 យកតែ 0.9)
+            $decimal = $division - floor($division);
+            
+            // ៤. យកមកគុណនឹង ៨០ វិញ រួចបង្គត់លេខ (Round) ដើម្បីឱ្យចេញលេខរាយពី ១-៨០
+            $finalResult = round($decimal * 80);
+
+            // តារាងលទ្ធផល
+           // កែប្រែក្នុង File predict.php ត្រង់ផ្នែក $table
+$table = [
+    1 => "ល្អណាស់ = រីកចម្រើនអាចទទួលបានជ័យជំនះ",
+    2 => "ធម្មតា = មានលាភមានជ័យមិនទទួលផលអ្វីទេ",
+    3 => "ល្អណាស់ = មានភាពរីកចម្រើនអ្វីៗអាចសម្រេចបានដូចបំណង",
+    4 => "អាក្រក់ = ផ្លូវអនាគតមានឧបសគ្គច្រើនលំបាកវេទនា",
+    5 => "ល្អណាស់ = រកស៊ីមានបានទទួលបានទាំងកិត្តិយស ទាំងផលប្រយោជន៍",
+    6 =>  "ល្អណាស់​​ =​ មានសំណាងច្រើនអាចទទួលបានគុណសម្បត្តិធំ",
+    72 => "ល្អ = មានសុភមង្គលនិងសំណាងល្អ",
+
+    // បន្ថែមលេខ ៤៤ ចូលដើម្បីឱ្យវាលែងលោតសារនោះ
+    44 => "លទ្ធផលលេខ 44: (សូមបញ្ចូលអត្ថន័យតាមក្បួនចិននៅទីនេះ)",
+    
+    // ត្រូវសរសេរបន្តបន្ទាប់រហូតដល់លេខ ៨០...
+];
+            echo "<div class='result'>";
+            echo "លេខ ៦ ខ្ទង់ចុងក្រោយ: <b>$lastSix</b><br>";
+            echo "ផលចែក: " . number_format($division, 4) . "<br>";
+            echo "លេខសំណាងរបស់អ្នកគឺ: <b style='color:red; font-size:20px;'>$finalResult</b><br><hr>";
+            
+            // បង្ហាញអត្ថន័យ
+            if (isset($table[$finalResult])) {
+                echo "<b>ទំនាយ:</b> " . $table[$finalResult];
+            } else {
+                echo "<b>ទំនាយ:</b> លទ្ធផលលេខ $finalResult (មិនទាន់មានក្នុងប្រព័ន្ធ)";
+                
+            }
+            echo "</div>";
+        }
+    }
+    ?>
+</div>
+
+</body>
+</html>
